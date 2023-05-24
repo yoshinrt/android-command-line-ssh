@@ -23,6 +23,7 @@ LOCAL_SRC_FILES := \
     openbsd-compat/port-tun.c openbsd-compat/setproctitle.c \
     openbsd-compat/bsd-closefrom.c  openbsd-compat/getopt.c \
     openbsd-compat/rresvport.c openbsd-compat/bindresvport.c \
+    openbsd-compat/bsd-arc4random.c \
     openbsd-compat/bsd-statvfs.c openbsd-compat/xmmap.c \
     openbsd-compat/port-linux.c openbsd-compat/strmode.c \
     openbsd-compat/bsd-openpty.c \

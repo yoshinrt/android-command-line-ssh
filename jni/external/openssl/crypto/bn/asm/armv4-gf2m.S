@@ -121,7 +121,7 @@ bn_GF2m_mul_2x2:
 	beq	.Lialu
 
 	veor	d18,d18
-	vmov.32	d19,r3,r3		@ two copies of b1
+	vmov	d19,r3,r3		@ two copies of b1
 	vmov.32	d18[0],r1		@ a1
 
 	veor	d20,d20
@@ -205,7 +205,7 @@ bn_GF2m_mul_2x2:
 #if __ARM_ARCH__>=7
 .align	5
 .LOPENSSL_armcap:
-.word	OPENSSL_armcap_P-(.Lpic+8)
+.word	OPENSSL_armcap_P(GOT_PREL)-((.Lpic+8)-.LOPENSSL_armcap)
 #endif
 .asciz	"GF(2^m) Multiplication for ARMv4/NEON, CRYPTOGAMS by <appro@openssl.org>"
 .align	5

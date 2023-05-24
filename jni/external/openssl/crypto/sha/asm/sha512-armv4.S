@@ -56,7 +56,7 @@ WORD64(0x4cc5d4be,0xcb3e42b6, 0x597f299c,0xfc657e2a)
 WORD64(0x5fcb6fab,0x3ad6faec, 0x6c44198c,0x4a475817)
 .size	K512,.-K512
 .LOPENSSL_armcap:
-.word	OPENSSL_armcap_P-sha512_block_data_order
+.word	OPENSSL_armcap_P(GOT_PREL)-(sha512_block_data_order-.LOPENSSL_armcap)
 .skip	32-4
 
 .global	sha512_block_data_order
