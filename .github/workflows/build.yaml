@@ -1,0 +1,21 @@
+# -*- tab-width: 2; indent-tabs-mode: nil -*-
+
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r25c
+      
+      - name: build
+        run: |
+          tools/build.sh
