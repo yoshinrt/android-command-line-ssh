@@ -15,21 +15,18 @@ cd $SCRIPT_DIR/../jni
 
 $ANDROID_NDK_ROOT/ndk-build -j8
 
-PREBUILT=$SCRIPT_DIR/../prebuilt
-PREBUILT_OPENSSH=$PREBUILT/openssh
-
 cd $SCRIPT_DIR/..
-
-rm -rf $PREBUILT
-mkdir $PREBUILT
-mkdir $PREBUILT_OPENSSH
-mkdir $PREBUILT_OPENSSH/armeabi-v7a
-mkdir $PREBUILT_OPENSSH/armeabi-v7a/bin
-mkdir $PREBUILT_OPENSSH/armeabi-v7a/lib
 
 OUT=obj/local/armeabi-v7a
 
-cp $OUT/ssh_exe $PREBUILT_OPENSSH/armeabi-v7a/bin/ssh
-cp $OUT/scp $PREBUILT_OPENSSH/armeabi-v7a/bin
-cp $OUT/sftp $PREBUILT_OPENSSH/armeabi-v7a/bin
-cp $OUT/libssh.so $PREBUILT_OPENSSH/armeabi-v7a/lib
+pushd $OUT
+mv ssh_exe ssh
+OUT_FILES=`ls | grep -v objs`
+
+#split
+for file in $OUT_FILES; do
+	$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip $file;
+done
+
+tar zcf $SCRIPT_DIR/../ssh_armeabi-v7a.tgz $OUT_FILES
+popd

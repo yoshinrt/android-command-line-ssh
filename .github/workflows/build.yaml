@@ -19,3 +19,9 @@ jobs:
       - name: build
         run: |
           tools/build.sh
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: package
+          path: ssh_armeabi-v7a.tgz
