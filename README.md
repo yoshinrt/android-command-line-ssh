@@ -1,33 +1,36 @@
-Android Command-Line SSH
+## Android Command-Line SSH
 
 This project is an installer for a non-rooted Android shell command line version of the SSH tools.
 
-Requirements:
+### Requirements:
 
-    + ARM armeabi-v7a based Android device.
-    + Android 1.6 or newer.
-    + You must have a terminal emulator such as Android Terminal Emulator installed on your device.
-    + You must have "adb" installed on your computer.
-    + You must have "bash" installed on your computer. (Sorry if you've got a Windows machine.)
+- ARM armeabi-v7a based Android device.
+- Android 1.6 or newer.
+- You must have a terminal emulator such as Android Terminal Emulator installed on your device.
 
-Features:
+### Features:
 
-    + Installs command-line versions of ssh, scp, and sftp.
-    + Works on ordinary non-rooted Android devices.
+- Installs command-line versions of ssh, scp, and sftp.
+- Works on ordinary non-rooted Android devices.
 
-Install instructions:
+### Install instructions:
 
-    Connect your android device to your computer with USB cable.
-    $ tools/install.sh
+- Extract ssh_armeabi-v7a.tgz on android device.
 
-Use instructions:
+### Use instructions:
 
-    + Launch Android Terminal Emulator
-    + Put /data/local/bin on your PATH
-    + Put /data/local/lib on your LD_LIBRARY_PATH
-    $ ssh username@host
+```
+export HOME=<dir> # $HOME/.ssh is referenced
+export PATH=<ssh, scp, sftp path>:$PATH
+export LD_LIBRARY_PATH=<*.so path>:$LD_LIBRARY_PATH
 
-Known Bugs / Limitations:
+mkdir -p $HOME/.ssh
+# Place ssh keys, ssh_config, etc. in $HOME/.ssh
+chmod 600 $HOME/.ssh $HOME/.ssh/*
 
-    + Looks for configuration files in /data/.ssh (which is not writable by non-rooted phones.)
-    + Only supports armeabi-v7a devices.
+ssh user@host
+```
+
+### Known Bugs / Limitations:
+
+- Only supports armeabi-v7a devices.
