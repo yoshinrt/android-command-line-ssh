@@ -46,6 +46,7 @@ main(int argc, char **argv)
 		    (u_long)getuid());
 		return 1;
 	}
+	char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 
 	return (sftp_server_main(argc, argv, user_pw));
 }

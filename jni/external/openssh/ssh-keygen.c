@@ -1943,6 +1943,7 @@ main(int argc, char **argv)
 
 	/* we need this for the home * directory.  */
 	pw = getpwuid(getuid());
+	char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 	if (!pw) {
 		printf("You don't exist, go away!\n");
 		exit(1);

@@ -98,6 +98,7 @@ testAPI()
 	printf("**\n** Testing the API...\n**\n");
 
 	pw = getpwuid(getuid());
+	char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 	strlcpy(username, pw->pw_name, sizeof(username));
 
 	/* gethostname(hostname, sizeof(hostname)); */

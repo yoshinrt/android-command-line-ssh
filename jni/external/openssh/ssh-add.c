@@ -461,6 +461,7 @@ main(int argc, char **argv)
 			ret = 1;
 			goto done;
 		}
+		char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 
 		for (i = 0; default_files[i]; i++) {
 			snprintf(buf, sizeof(buf), "%s/%s", pw->pw_dir,

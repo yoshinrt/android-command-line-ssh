@@ -174,6 +174,7 @@ main(int argc, char **argv)
 	original_real_uid = getuid();	/* XXX readconf.c needs this */
 	if ((pw = getpwuid(original_real_uid)) == NULL)
 		fatal("getpwuid failed");
+	char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 	pw = pwcopy(pw);
 
 	permanently_set_uid(pw);

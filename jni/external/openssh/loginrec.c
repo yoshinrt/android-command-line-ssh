@@ -310,6 +310,7 @@ login_get_lastlog(struct logininfo *li, const uid_t uid)
 	 * wtmp_get_entry().)
 	 */
 	pw = getpwuid(uid);
+	char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 	if (pw == NULL)
 		fatal("%s: Cannot find account for uid %ld", __func__,
 		    (long)uid);
@@ -384,6 +385,7 @@ login_init_entry(struct logininfo *li, pid_t pid, const char *username,
 			fatal("%s: Cannot find user \"%s\"", __func__,
 			    li->username);
 		}
+		char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 		li->uid = pw->pw_uid;
 	}
 

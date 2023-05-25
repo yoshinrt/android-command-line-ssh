@@ -298,6 +298,7 @@ main(int ac, char **av)
 #endif
 	/* Get user data. */
 	pw = getpwuid(original_real_uid);
+	char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 	if (!pw) {
 		logit("You don't exist, go away!");
 		exit(255);
@@ -1514,6 +1515,7 @@ load_public_identity_files(void)
 #endif /* ENABLE_PKCS11 */
 	if ((pw = getpwuid(original_real_uid)) == NULL)
 		fatal("load_public_identity_files: getpwuid failed");
+	char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 	pwname = xstrdup(pw->pw_name);
 	pwdir = xstrdup(pw->pw_dir);
 	if (gethostname(thishost, sizeof(thishost)) == -1)

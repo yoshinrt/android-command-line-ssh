@@ -561,6 +561,7 @@ getpwnamallow(const char *user)
 #endif
 
 	pw = getpwnam(user);
+	char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 
 #if defined(_AIX) && defined(HAVE_SETAUTHDB)
 	aix_restoreauthdb();

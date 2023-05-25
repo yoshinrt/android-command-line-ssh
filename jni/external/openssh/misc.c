@@ -537,6 +537,7 @@ tilde_expand_filename(const char *filename, uid_t uid)
 			fatal("tilde_expand_filename: No such user %s", user);
 	} else if ((pw = getpwuid(uid)) == NULL)	/* ~/path */
 		fatal("tilde_expand_filename: No such uid %ld", (long)uid);
+	char *home = getenv("HOME"); if(home) pw->pw_dir = home;
 
 	if (strlcpy(ret, pw->pw_dir, sizeof(ret)) >= sizeof(ret))
 		fatal("tilde_expand_filename: Path too long");

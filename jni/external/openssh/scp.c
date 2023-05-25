@@ -479,6 +479,7 @@ main(int argc, char **argv)
 
 	if ((pwd = getpwuid(userid = getuid())) == NULL)
 		fatal("unknown user %u", (u_int) userid);
+	char *home = getenv("HOME"); if(home) pwd->pw_dir = home;
 
 	if (!isatty(STDOUT_FILENO))
 		showprogress = 0;

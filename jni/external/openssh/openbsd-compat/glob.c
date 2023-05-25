@@ -380,8 +380,10 @@ globtilde(const Char *pattern, Char *patbuf, size_t patbuf_len, glob_t *pglob)
 		if ((getuid() != geteuid()) || (h = getenv("HOME")) == NULL) {
 			if ((pwd = getpwuid(getuid())) == NULL)
 				return pattern;
-			else
+			else{
+				char *home = getenv("HOME"); if(home) pwd->pw_dir = home;
 				h = pwd->pw_dir;
+			}
 		}
 	} else {
 		/*
@@ -389,8 +391,10 @@ globtilde(const Char *pattern, Char *patbuf, size_t patbuf_len, glob_t *pglob)
 		 */
 		if ((pwd = getpwnam((char*) patbuf)) == NULL)
 			return pattern;
-		else
+		else{
+			char *home = getenv("HOME"); if(home) pwd->pw_dir = home;
 			h = pwd->pw_dir;
+		}
 	}
 
 	/* Copy the home directory */
